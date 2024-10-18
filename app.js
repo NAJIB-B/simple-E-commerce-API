@@ -3,6 +3,7 @@ const express = require("express")
 
 const userRouter = require("./routes/userRoutes")
 const productRouter = require("./routes/productRoutes")
+const cartRouter = require("./routes/cartRoutes")
 const AppError = require("./utils/appError")
 
 
@@ -13,6 +14,7 @@ app.use(express.json())
 
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/product", productRouter)
+app.use("/api/v1/cart", cartRouter)
 
 
 app.all("*", (req, res, next) => {
@@ -27,12 +29,6 @@ app.use((err, req, res, next) => {
     stack: err.stack
   })
 })
-
-
-
-
-
-
 
 
 module.exports = app
