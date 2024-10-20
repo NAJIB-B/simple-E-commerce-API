@@ -30,7 +30,7 @@ exports.addToCart = catchAsync(async(req, res, next) => {
   }
 
   // check if cart exist
-  const cart = await Cart.findOne({owner: body.owner})
+  const cart = await Cart.findOne({owner: owner})
   //if the cart don't exist
   if (!cart) {
     const cart = await Cart.create(body)

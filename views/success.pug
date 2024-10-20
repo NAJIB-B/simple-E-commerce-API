@@ -1,0 +1,75 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Payment Successful
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap")
+    style.
+      body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f9;
+        margin: 0;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+      }
+      .container h1 {
+        color: #28a745;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .container p {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .container .order-summary {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .container .order-summary h2 {
+        font-size: 1.5rem;
+        color: #495057;
+        margin-bottom: 10px;
+      }
+      .container .order-summary p {
+        font-size: 1.1rem;
+        color: #6c757d;
+        margin-bottom: 5px;
+      }
+      .container .btn {
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 20px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .container .btn:hover {
+        background-color: #0056b3;
+      }
+  body
+    .container
+      h1 Success!
+      p Your payment was processed successfully. Thank you for your purchase!
+      .order-summary
+        h2 Order Summary
+        p Product: Corn and Beer
+        p Amount Paid: let by gone be gone
+        p Transaction ID: sjflsj9sufsf89322r43r4cc4x-43848
+      a.btn(href="/") Go to Homepage
+

@@ -2,7 +2,9 @@ const express = require("express")
 const {body} = require("express-validator")
 
 
-const {createUser, loginUser} = require("../contollers/userController")
+const {createUser, loginUser, forgotPassword, resetPassword, updatePassword} = require("../contollers/userController")
+
+const {protect} = require("../contollers/authController")
 
 
 
@@ -49,5 +51,39 @@ router.post("/login",
 ,loginUser
 )
 
+router.post("/forgotPassword", forgotPassword)
 
+router.post("/resetPassword/:token",[
+
+    body("password")
+      .notEmpty()
+      .withMessage(
+        "Please provide your new password",
+      ),
+    body("confirmPassword")
+      .notEmpty()
+      .withMessage(
+        "Please confirm your new password ",
+      ),
+] ,resetPassword)
+
+
+router.post("/updatePassword",protect, [
+
+    body("currentPassword")
+      .notEmpty()
+      .withMessage(
+        "Please provide your current password",
+      ),
+    body("newPassword")
+      .notEmpty()
+      .withMessage(
+        "Please provide your new password",
+      ),
+    body("confirmNewPassword")
+      .notEmpty()
+      .withMessage(
+        "Please confirm your new password ",
+      ),
+], updatePassword)
 module.exports = router

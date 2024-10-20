@@ -1,0 +1,78 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Checkout
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap")
+    style.
+      body {
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f9;
+        margin: 0;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+      }
+      h1 {
+        color: #343a40;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      label {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #495057;
+        text-align: left;
+      }
+      input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.1rem;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+      }
+      input[type="text"]:focus, input[type="number"]:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+  body
+    .container
+      h1 Checkout
+      form(action="/api/v1/payment/makePayment" method="POST")
+        label(for="productId") Product ID
+        input(type="text" name="productId" id="productId" placeholder="Enter Product ID" required)
+        
+        label(for="quantity") Quantity
+        input(type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="1" required)
+
+        button(type="submit") Proceed to Payment
+
