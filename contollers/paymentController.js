@@ -1,4 +1,4 @@
-const stripe = require("stripe")('sk_test_51LVtx0JLqChSiTdMWVbMBs53P8Fb4Xn5CxoG6RH75yGgJAclARhwm60wqZBPfHHIEN0Ag8x932zHDYteph7WPlnw00MHWbg4mS')
+const stripe = require("stripe")(process.env.STRIP_API_KEY)
 const {validationResult} = require("express-validator")
 
 
