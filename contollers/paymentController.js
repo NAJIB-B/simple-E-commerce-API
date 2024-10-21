@@ -4,6 +4,7 @@ const {validationResult} = require("express-validator")
 
 const catchAsync = require("../utils/catchAsync")
 const User = require("../models/userModels")
+const Cart = require("../models/cartModels")
 const Payment = require("../models/paymentModels")
 const  AppError = require("../utils/appError")
 const Product = require("../models/productModels")
@@ -64,13 +65,29 @@ const fulfillCheckout = async(sessionId) => {
   const userId= (await User.findOne({ email: userEmail })).id;
 
 
-
+//Add payment to payment history
   const payment = await Payment.create({
     product: productId,
     user: userId
   })
-
   console.log('payment created')
+//delete Item from cart
+
+  const cart = await Cart.findOne({owner: userId})
+
+  const productIndex = cart.products.findIndex((product) => product.productId.toString() === productId)
+
+  if (productIndex === -1) {
+
+    return next(new AppError("This product is not in your cart", 400))
+  }
+
+  cart.products.splice(productIndex, 1)
+
+  await cart.save()
+  console.log('cart item deleted successfully')
+
+
 
 }
 
