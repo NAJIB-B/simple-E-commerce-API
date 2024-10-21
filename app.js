@@ -1,5 +1,6 @@
 const express = require("express")
 const path = require("path")
+const bodyParser = require('body-parser');
 
 
 const userRouter = require("./routes/userRoutes")
@@ -7,10 +8,18 @@ const productRouter = require("./routes/productRoutes")
 const cartRouter = require("./routes/cartRoutes")
 const paymentRouter = require("./routes/paymentRoutes")
 const viewRouter = require("./routes/viewRoutes")
+const {webhookCheckout} = require("./contollers/paymentController")
 const AppError = require("./utils/appError")
 
 
 const app = express()
+
+// Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  webhookCheckout
+);
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -27,6 +36,8 @@ app.use("/", viewRouter)
 
 
 app.all("*", (req, res, next) => {
+  console.log(`${req.protocol}://${req.get('host')}/${req.originalUrl}`)
+  
   return next(new AppError("Not found please check the url and try again", 404))
 })
 

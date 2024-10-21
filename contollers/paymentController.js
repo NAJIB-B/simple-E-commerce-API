@@ -3,6 +3,8 @@ const {validationResult} = require("express-validator")
 
 
 const catchAsync = require("../utils/catchAsync")
+const User = require("../models/userModels")
+const Payment = require("../models/paymentModels")
 const  AppError = require("../utils/appError")
 const Product = require("../models/productModels")
 
@@ -17,7 +19,7 @@ exports.processPayment = catchAsync(async(req, res, next) => {
     return next(new AppError(errors, 400))
   }
 
-  const {productId, quantity} = req.body 
+  const {productId, quantity, email} = req.body 
 
   const productReq = await Product.findById(productId)
   const priceReq = productReq.price
@@ -36,6 +38,8 @@ exports.processPayment = catchAsync(async(req, res, next) => {
 
 
   const session = await stripe.checkout.sessions.create({
+    customer_email: email,
+    client_reference_id: productId,
     line_items: [
       {
         price: price.id,
@@ -51,3 +55,63 @@ exports.processPayment = catchAsync(async(req, res, next) => {
 
   res.redirect(303, session.url);
 }) 
+
+const fulfillCheckout = async(sessionId) => {
+
+  const productId = sessionId.client_reference_id;
+  const userEmail = sessionId.customer_email  
+
+  const userId= (await User.findOne({ email: userEmail })).id;
+
+
+
+  const payment = await Payment.create({
+    product: productId,
+    user: userId
+  })
+
+  console.log('payment created')
+
+}
+
+exports.webhookCheckout = (req, res, next) => {
+  
+//  const signature = req.headers['stripe-signature'];
+
+  const payloadString = req.body
+
+// create a signature/header for the event. for testing
+  const header = stripe.webhooks.generateTestHeaderString({
+  payload: payloadString,
+  secret: process.env.STRIPE_WEBHOOK_SECRET
+
+});
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(
+      req.body,
+      header,
+      process.env.STRIPE_WEBHOOK_SECRET
+    )
+  } catch (err) {
+   console.error('Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook error: ${err.message}`);
+  }
+
+  if (event.type === 'checkout.session.completed') {
+
+    fulfillCheckout(event.data.object);
+  }
+
+  res.status(200).json({ received: true });
+};
+
+exports.getAllPayment = catchAsync(async(req, res, next) => {
+  const payments = await Payment.find().populate('product', 'name price').populate('user', 'name email')
+
+  res.status(200).json({
+    message: 'success',
+    payments
+  })
+})
