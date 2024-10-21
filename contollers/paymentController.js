@@ -22,8 +22,18 @@ exports.processPayment = catchAsync(async(req, res, next) => {
 
   const {productId, quantity, email} = req.body 
 
+
   const productReq = await Product.findById(productId)
   const priceReq = productReq.price
+
+  //check is product is available in stock
+  const availableQuantity = productReq.quantity - productReq.reservedQuantity
+
+  if (availableQuantity < quantity) {
+    return next(new AppError(`We're sorry, but the quantity you requested exceeds the available stock. We currently only have ${availableQuantity} units available.`, 400))
+  }
+  productReq.reservedQuantity += +quantity
+  
   
      // Create a product
     const product = await stripe.products.create({
@@ -41,6 +51,9 @@ exports.processPayment = catchAsync(async(req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     customer_email: email,
     client_reference_id: productId,
+    metadata: {
+      quantity
+    },
     line_items: [
       {
         price: price.id,
@@ -54,6 +67,7 @@ exports.processPayment = catchAsync(async(req, res, next) => {
 
   })
 
+  await productReq.save()
   res.redirect(303, session.url);
 }) 
 
@@ -61,6 +75,7 @@ const fulfillCheckout = async(sessionId) => {
 
   const productId = sessionId.client_reference_id;
   const userEmail = sessionId.customer_email  
+  const quantity = sessionId.metadata.quantity
 
   const userId= (await User.findOne({ email: userEmail })).id;
 
@@ -86,6 +101,17 @@ const fulfillCheckout = async(sessionId) => {
 
   await cart.save()
   console.log('cart item deleted successfully')
+
+  //update product stock
+
+  const product = await Product.findById(productId)
+
+  product.quantity -= +quantity
+  product.reservedQuantity -= +quantity
+
+  await product.save()
+
+  console.log('updated product stock')
 
 
 

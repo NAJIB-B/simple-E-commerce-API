@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'A product must have quantity']
   },
+  reservedQuantity: {
+    type: Number,
+    default: 0
+  },
   description: {
     type: String,
   }
