@@ -113,8 +113,6 @@ const fulfillCheckout = async(sessionId) => {
 
   console.log('updated product stock')
 
-
-
 }
 
 exports.webhookCheckout = (req, res, next) => {

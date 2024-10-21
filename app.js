@@ -36,8 +36,6 @@ app.use("/", viewRouter)
 
 
 app.all("*", (req, res, next) => {
-  console.log(`${req.protocol}://${req.get('host')}/${req.originalUrl}`)
-  
   return next(new AppError("Not found please check the url and try again", 404))
 })
 
