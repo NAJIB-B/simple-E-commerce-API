@@ -65,7 +65,7 @@ STRIPE_WEBHOOK_SECRET=&lt;your-stripe-webhook-secret&gt;
   
   </code></pre>
 
-  <p><strong>Note:</strong></p>
+
 
 
   <li><strong>Run the project</strong></li>
