@@ -1,0 +1,153 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Product Page
+    style.
+      /* Basic reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      /* Header */
+      header {
+        background-color: #333;
+        color: white;
+        padding: 15px 0;
+      }
+      nav ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+      }
+      nav ul li {
+        margin: 0 20px;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav ul li a:hover {
+        color: #ff6f61;
+      }
+
+      /* Product Section */
+      .product-section {
+        display: flex;
+        justify-content: center;
+        padding: 50px 20px;
+        background-color: white;
+      }
+      .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        max-width: 1200px;
+      }
+      .product-image {
+        flex: 1;
+        max-width: 500px;
+      }
+      .product-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .product-details {
+        flex: 2;
+        max-width: 600px;
+      }
+      .product-details h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .product-details p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      .product-price {
+        font-size: 1.5rem;
+        color: #ff6f61;
+        margin-bottom: 30px;
+      }
+      .product-description {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+      }
+      .add-to-cart-btn {
+        background-color: #ff6f61;
+        color: white;
+        padding: 15px 25px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+      .add-to-cart-btn:hover {
+        background-color: #e05d53;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+      footer ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        margin-bottom: 20px;
+      }
+      footer ul li {
+        margin: 0 15px;
+      }
+      footer ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      footer p {
+        font-size: 1rem;
+      }
+
+  body
+    header
+      nav
+        ul
+          li: a(href="#home") Home
+          li: a(href="#shop") Shop
+          li: a(href="#about") About Us
+          li: a(href="#contact") Contact
+
+    section.product-section
+      .product-container
+        .product-image
+          img(src="https://via.placeholder.com/600x600" alt="Product Image")
+        .product-details
+          h2 Product Title
+          p A brief description of the product goes here. Highlight its main features and benefits.
+          .product-price $49.99
+          .product-description
+            p This product is designed to offer excellent value with top-quality craftsmanship. It’s perfect for customers looking for durability and performance.
+          a(href="#add-to-cart" class="add-to-cart-btn") Add to Cart
+
+    footer
+      .footer-content
+        ul
+          li: a(href="#terms") Terms & Conditions
+          li: a(href="#privacy") Privacy Policy
+          li: a(href="#returns") Returns Policy
+        p &copy; 2025 Your Store Name. All Rights Reserved.

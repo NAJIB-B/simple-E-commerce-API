@@ -1,0 +1,108 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Login Page
+    style.
+      /* Basic reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        font-size: 1.1rem;
+        color: #333;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+
+      .form-group input:focus {
+        border-color: #ff6f61;
+        outline: none;
+        background-color: #fff;
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #ff6f61;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .login-btn:hover {
+        background-color: #e05d53;
+      }
+
+      .forgot-password {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .forgot-password a {
+        color: #ff6f61;
+        text-decoration: none;
+      }
+
+      .forgot-password a:hover {
+        text-decoration: underline;
+      }
+
+  body
+    .login-container
+      h1 Login to Your Account
+      form(action="#login", method="POST")
+        .form-group
+          label(for="email") Email Address
+          input(type="email", id="email", name="email", placeholder="Enter your email", required)
+        .form-group
+          label(for="password") Password
+          input(type="password", id="password", name="password", placeholder="Enter your password", required)
+        button(type="submit", class="login-btn") Login
+      .forgot-password
+        p Don't have an account? <a href="#register">Sign up</a>
+        p <a href="#forgot-password">Forgot your password?</a>

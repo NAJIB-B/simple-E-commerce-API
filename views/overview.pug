@@ -6,76 +6,223 @@ html(lang="en")
     title Checkout
     link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap")
     style.
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: 'Roboto', sans-serif;
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      /* Header */
+      header {
+        background-color: #333;
+        color: white;
+        padding: 15px 0;
+      }
+      nav ul {
         display: flex;
         justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f4f4f9;
-        margin: 0;
+        list-style-type: none;
       }
-      .container {
-        background-color: #ffffff;
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      nav ul li {
+        margin: 0 20px;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav ul li a:hover {
+        color: #ff6f61;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: url('https://via.placeholder.com/1200x600') no-repeat center center/cover;
+        color: white;
         text-align: center;
-        max-width: 500px;
-        width: 100%;
+        padding: 100px 20px;
       }
-      h1 {
-        color: #343a40;
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+      }
+      .cta-button {
+        background-color: #ff6f61;
+        color: white;
+        padding: 15px 25px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+      }
+      .cta-button:hover {
+        background-color: #e05d53;
+      }
+
+      /* Features Section */
+      .features {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: white;
+      }
+      .features h2 {
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+      }
+      .product-list {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .product-item {
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 250px;
+      }
+      .product-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .product-item h3 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+      }
+      .product-item p {
+        font-size: 1.2rem;
+        color: #ff6f61;
+      }
+      .product-item a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      /* About Section */
+      .about {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #f9f9f9;
+      }
+      .about h2 {
         font-size: 2.5rem;
         margin-bottom: 20px;
       }
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+      .about p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
       }
-      label {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #495057;
-        text-align: left;
+
+      /* Testimonials Section */
+      .testimonials {
+        padding: 50px 20px;
+        background-color: #fff;
+        text-align: center;
       }
-      input[type="text"], input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        font-size: 1.1rem;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
+      .testimonials h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
       }
-      input[type="text"]:focus, input[type="number"]:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+      .testimonial {
+        margin: 20px 0;
+        font-style: italic;
       }
-      button {
-        background-color: #007bff;
+      .testimonial p {
+        font-size: 1.2rem;
+        color: #555;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #333;
         color: white;
-        padding: 12px 20px;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        text-align: center;
+        padding: 20px 0;
       }
-      button:hover {
-        background-color: #0056b3;
+      footer ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        margin-bottom: 20px;
       }
+      footer ul li {
+        margin: 0 15px;
+      }
+      footer ul li a {
+        color: white;
+        text-decoration: none;
+      }
+      footer p {
+        font-size: 1rem;
+      }
+
   body
-    .container
-      h1 Checkout
-      form(action="/api/v1/payment/makePayment" method="POST")
-        label(for="productId") Product ID
-        input(type="text" name="productId" id="productId" placeholder="Enter Product ID" required)
-        
-        label(for="quantity") Quantity
-        input(type="number" name="quantity" id="quantity" placeholder="Enter Quantity" min="1" required)
+    header
+      nav
+        ul
+          li: a(href="#home") Home
+          li: a(href="#shop") Shop
+          li: a(href="#about") About Us
+          li: a(href="#contact") Contact
 
-        label(for="email") email
-        input(type="text" name="email" id="email" placeholder="Enter email"  required)
+    section.hero
+      .hero-content
+        h1 Welcome to Our Online Store
+        p Shop the best products at unbeatable prices!
+        a(href="#shop" class="cta-button") Shop Now
 
-        button(type="submit") Proceed to Payment
+    section.features
+      h2 Featured Products
+      .product-list
+        .product-item
+          img(src="https://via.placeholder.com/200x200" alt="Product 1")
+          h3 Product 1
+          p $29.99
+          a(href="/success") View Details
+        .product-item
+          img(src="https://via.placeholder.com/200x200" alt="Product 2")
+          h3 Product 2
+          p $19.99
+          a(href="#product2") View Details
+        .product-item
+          img(src="https://via.placeholder.com/200x200" alt="Product 3")
+          h3 Product 3
+          p $39.99
+          a(href="#product3") View Details
+
+    section.about
+      h2 About Us
+      p We are dedicated to providing the best shopping experience for all our customers. Explore our wide range of high-quality products!
+
+    section.testimonials
+      h2 What Our Customers Say
+      .testimonial
+        p "Great service and amazing products!" - Customer Name
+      .testimonial
+        p "I love the variety of products available!" - Another Customer
+
+    footer
+      .footer-content
+        ul
+          li: a(href="#terms") Terms & Conditions
+          li: a(href="#privacy") Privacy Policy
+          li: a(href="#returns") Returns Policy
+        p &copy; 2025 Your Store Name. All Rights Reserved.
 
